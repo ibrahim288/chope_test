@@ -1,29 +1,32 @@
 <?php
+
+$container = getenv('ENV_CONTAINER');
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
-    require __DIR__ . '/../../common/config/params-local.php',
     require __DIR__ . '/params.php',
-    require __DIR__ . '/params-local.php'
 );
+
+$rules = require(__DIR__ . '/rules.php');
 
 return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'api\controllers',
+    'controllerNamespace' => 'api\controllers\v1',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-api',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
         ],
-        'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-api', 'httpOnly' => true],
-        ],
-        'session' => [
-            // this is the name of the session cookie used for login on the api
-            'name' => 'advanced-api',
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
+            'showScriptName' => false,
+            'ruleConfig' => ['class' => 'api\components\APIUrlRule'],
+            'rules' => $rules,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -34,17 +37,16 @@ return [
                 ],
             ],
         ],
-        'errorHandler' => [
-            'errorAction' => 'site/error',
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=chope_test_db;dbname=chope_test_db',
+            'username' => 'chope_test_user',
+            'password' => 'chope_test_password',
+            'charset' => 'utf8',
         ],
-        /*
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-            ],
+        'user' => [
+            'identityClass' => 'app\models\User',
         ],
-        */
     ],
     'params' => $params,
 ];

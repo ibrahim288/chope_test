@@ -1,35 +1,68 @@
 version: '3.7'
 services:
-
-  portal:
-    image: php:7-fpm-alpine
+  composer:
+    restart: 'no'
+    image: composer/composer
+    container_name: chope_test_composer
+    working_dir: /var/www/chope_test
+    command: install
     volumes:
-      - ./:/var/www/chope_test
+      - .:/var/www/chope_test
     networks:
       - app-network
-
   api:
-    image: php:7-fpm-alpine
+    build: ./docker-config
+    container_name: chope_test_api
     volumes:
-      - ./:/var/www/chope_test
+      - .:/var/www/chope_test
+    stdin_open: true
+    tty: true
     networks:
       - app-network
-
-  # mysql:
-  #   image: mysql:5.7
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=verysecret
-  #     - MYSQL_DATABASE=yii2advanced
-  #     - MYSQL_USER=yii2advanced
-  #     - MYSQL_PASSWORD=secret
-
+    working_dir: /var/www/chope_test
+    command: sh -c "
+      bash ./docker-config/wait-for-composer.sh
+      && php yii migrate --interactive=0
+      && php-fpm
+      "
+    depends_on:
+      - "composer"
+      - "db"
+  portal:
+    image: php:7.4-fpm
+    container_name: chope_test_portal
+    volumes:
+      - .:/var/www/chope_test
+    stdin_open: true
+    tty: true
+    networks:
+      - app-network
+    command: sh -c "php-fpm"
+  db:
+    image: mysql:5.7
+    container_name: chope_test_db
+    volumes:
+      - ./docker-config/dbdata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=verysecret
+      - MYSQL_DATABASE=chope_test_db
+      - MYSQL_USER=chope_test_user
+      - MYSQL_PASSWORD=chope_test_password
+    tty: true
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
   webserver:
     image: nginx
+    container_name: chope_test_webserver
+    volumes:
+      - ./docker-config:/etc/nginx/conf.d
+      - .:/var/www/chope_test
     ports:
       - 8008:80
     networks:
       - app-network
-
 networks:
   app-network:
     driver: bridge
