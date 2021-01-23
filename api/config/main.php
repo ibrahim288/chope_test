@@ -47,6 +47,9 @@ return [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+            'enableSession' => false,
+            'enableAutoLogin' => false,
+            'loginUrl' => null // Set the loginUrl property to be null to show a HTTP 403 error instead of redirecting to the login page.
         ],
         'response' => [
             'format' => yii\web\Response::FORMAT_JSON,

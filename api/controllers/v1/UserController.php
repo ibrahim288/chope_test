@@ -7,7 +7,8 @@ class UserController extends APIBaseController
 {
     public $modelClass = 'api\models\User';
 
-    public function actionView($id) {
+    public function actionView($id)
+    {
       return ["1"];
     }
 }

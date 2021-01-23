@@ -15,6 +15,7 @@ class APIUrlRule extends UrlRule
         }
 
         Yii::$app->controllerNamespace = "api\controllers\\" . $path[0];
+        Yii::$app->request->enableCsrfValidation = false;
 
         return parent::parseRequest($manager, $request);
     }
