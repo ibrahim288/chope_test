@@ -12,7 +12,6 @@ $rules = require(__DIR__ . '/rules.php');
 return [
     'id' => 'app-api',
     'basePath' => dirname(__DIR__),
-    'controllerNamespace' => 'api\controllers\v1',
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [

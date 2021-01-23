@@ -13,6 +13,9 @@ class APIUrlRule extends UrlRule
         if (count($path) < 2) {
             throw new InvalidRouteException();
         }
+
+        Yii::$app->controllerNamespace = "api\controllers\\" . $path[0];
+
         return parent::parseRequest($manager, $request);
     }
 }
