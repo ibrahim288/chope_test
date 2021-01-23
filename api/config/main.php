@@ -18,6 +18,8 @@ return [
     'components' => [
         'request' => [
             'parsers' => [
+                'enableCookieValidation' => false,
+                'enableCsrfValidation' => false,
                 'application/json' => 'yii\web\JsonParser',
             ],
         ],
@@ -33,7 +35,7 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'info'],
                 ],
             ],
         ],
@@ -46,6 +48,10 @@ return [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
+        ],
+        'response' => [
+            'format' => yii\web\Response::FORMAT_JSON,
+            'charset' => 'UTF-8',
         ],
     ],
     'params' => $params,

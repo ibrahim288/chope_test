@@ -1,9 +1,13 @@
 <?php
-namespace app\controllers;
+namespace api\controllers\v1;
 
-use yii\rest\ActiveController;
+use api\components\APIBaseController;
 
-class UserController extends ActiveController
+class UserController extends APIBaseController
 {
-    public $modelClass = 'app\models\User';
+    public $modelClass = 'api\models\User';
+
+    public function actionView($id) {
+      return ["1"];
+    }
 }
