@@ -16,9 +16,9 @@ return [
     'modules' => [],
     'components' => [
         'request' => [
+            'enableCookieValidation' => false,
+            'enableCsrfValidation' => false,
             'parsers' => [
-                'enableCookieValidation' => false,
-                'enableCsrfValidation' => false,
                 'application/json' => 'yii\web\JsonParser',
             ],
         ],
