@@ -1,0 +1,164 @@
+{
+	"info": {
+		"_postman_id": "6a185d75-656e-4311-af12-8909b9f5ee16",
+		"name": "Chope_test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ibrahim\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://api.chope.test:8008/v1/login",
+					"protocol": "http",
+					"host": [
+						"api",
+						"chope",
+						"test"
+					],
+					"port": "8008",
+					"path": [
+						"v1",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Signup",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://api.chope.test:8008/v1/signup/nCJ62UYLItDC9Ao8HuflsuVHVPGe4PG9_1611497470",
+					"protocol": "http",
+					"host": [
+						"api",
+						"chope",
+						"test"
+					],
+					"port": "8008",
+					"path": [
+						"v1",
+						"signup",
+						"nCJ62UYLItDC9Ao8HuflsuVHVPGe4PG9_1611497470"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"ibrahim\",\r\n    \"email\": \"ibrahim.alnameh@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://api.chope.test:8008/v1/signup",
+					"protocol": "http",
+					"host": [
+						"api",
+						"chope",
+						"test"
+					],
+					"port": "8008",
+					"path": [
+						"v1",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Audit logs ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "F1M1s0dbKRMbYyy3hDIYp6GgJ0g51io-",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.chope.test:8008/v1/auditlogs?page_number=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"chope",
+						"test"
+					],
+					"port": "8008",
+					"path": [
+						"v1",
+						"auditlogs"
+					],
+					"query": [
+						{
+							"key": "page_number",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "pK5ctiijMBbMRD5X-e5vXhHGgSE341d0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://api.chope.test:8008/v1/logout",
+					"protocol": "http",
+					"host": [
+						"api",
+						"chope",
+						"test"
+					],
+					"port": "8008",
+					"path": [
+						"v1",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
