@@ -8,7 +8,7 @@ class Redis
 {
     const SCENARIO_VERIFY_EMAIL = "VERIFY_EMAIL";
     const SCENARIO_VERIFY_TOKEN = "VERIFY_TOKEN";
-    const SCENARIO_LOGIN_LOGS = "LOGIN_LOGS";
+    const SCENARIO_ACTION_LOGS = "ACTION_LOGS";
 
     private $redisObject;
     private $redisDB;
@@ -20,21 +20,21 @@ class Redis
      * Redis constructor.
      * @param $redisDB
      */
-    public function __construct($scenatrio)
+    public function __construct($scenario)
     {
         $this->redisObject = Yii::$app->redis;
         switch ($scenario) {
             case self::SCENARIO_VERIFY_EMAIL:
-                $this->database = 0;
+                $this->redisObject->select(0);
                 $this->dataType = "String";
                 break;
             case self::SCENARIO_VERIFY_TOKEN:
-                $this->database = 1;
+                $this->redisObject->select(1);
                 $this->dataType = "String";
                 break;
-            case self::SCENARIO_LOGIN_LOGS:
+            case self::SCENARIO_ACTION_LOGS:
+            $this->redisObject->select(2);
                 $this->dataType = "List";
-                $this->database = 2;
                 break;
         }
     }

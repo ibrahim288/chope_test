@@ -4,12 +4,15 @@ namespace api\models;
 use Yii;
 use yii\base\Model;
 use api\models\User;
+use api\components\helpers\AuditLogs;
 
 /**
  * Signup form
  */
 class SignupForm extends Model
 {
+    use AuditLogs;
+
     public $username;
     public $email;
     public $password;
@@ -58,6 +61,7 @@ class SignupForm extends Model
         $user->setPassword($this->password);
         $user->generateAuthKey();
         if ($user->save()) {
+            $this->pushAction($user->id, self::SCENARIO_CREATE);
             $VerificationToken = $this->generateEmailVerificationToken($user->id);
             return $this->sendEmail($user, $VerificationToken);
         }
@@ -105,6 +109,8 @@ class SignupForm extends Model
             Yii::$app->user->identity = $user;
 
             $redis->removeKey($this->$attribute);
+
+            $this->pushAction($user->id, self::SCENARIO_UPDATE);
 
             return true;
         } else {

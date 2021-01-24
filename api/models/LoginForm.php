@@ -4,12 +4,15 @@ namespace api\models;
 use Yii;
 use yii\base\Model;
 use api\models\User;
+use api\components\helpers\AuditLogs;
 
 /**
  * Login form
  */
 class LoginForm extends Model
 {
+    use AuditLogs;
+
     public $username;
     public $password;
 
@@ -38,6 +41,7 @@ class LoginForm extends Model
         if ($user) {
             if ($user->validatePassword($this->password)) {
                 Yii::$app->user->identity = $user;
+                $this->pushAction($user->id, self::SCENARIO_LOGIN);
                 return true;
             }
         }
