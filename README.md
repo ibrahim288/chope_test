@@ -1,25 +1,18 @@
-<p align="center">
-    <a href="https://github.com/yiisoft" target="_blank">
-        <img src="https://avatars0.githubusercontent.com/u/993323" height="100px">
-    </a>
-    <h1 align="center">Yii 2 Advanced Project Template</h1>
-    <br>
-</p>
+CHOPE TEST
+----------
 
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
+Based on Yii 2 Advanced Project Template.
+The project will includes three tiers: api, portal, and console, each of which is a separate Yii application.
 
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
+Requirements
+------------
+- Git.
+- Docker.
 
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
-
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
-
-[![Latest Stable Version](https://img.shields.io/packagist/v/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://img.shields.io/packagist/dt/yiisoft/yii2-app-advanced.svg)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![build](https://github.com/yiisoft/yii2-app-advanced/workflows/build/badge.svg)](https://github.com/yiisoft/yii2-app-advanced/actions?query=workflow%3Abuild)
+Starting the Services
+---------------------
+After you clone the repository simply just run `docker-compose up`.
+It will take sometime first time, until all required libraries installed.
 
 DIRECTORY STRUCTURE
 -------------------
@@ -27,34 +20,30 @@ DIRECTORY STRUCTURE
 ```
 common
     config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
+    models/              contains model classes used in both api and portal
     tests/               contains tests for common classes    
 console
     config/              contains console configurations
     controllers/         contains console controllers (commands)
     migrations/          contains database migrations
-    models/              contains console-specific model classes
     runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
+api
+    config/              contains api configurations
     controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
+    models/              contains api-specific model classes
     runtime/             contains files generated during runtime
-    tests/               contains tests for backend application    
+    tests/               contains tests for api application    
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
-frontend
+portal
     assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
+    config/              contains portal configurations
     controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
+    models/              contains portal-specific model classes
     runtime/             contains files generated during runtime
-    tests/               contains tests for frontend application
+    tests/               contains tests for portal application
     views/               contains view files for the Web application
     web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
+    widgets/             contains portal widgets
 vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
 ```
