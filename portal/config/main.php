@@ -7,7 +7,8 @@ $params = array_merge(
 );
 
 return [
-    'id' => 'app-portal',
+    'id' => 'chope-test-portal',
+    'name' => 'Chope Test',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'portal\controllers',
@@ -16,7 +17,7 @@ return [
             'csrfParam' => '_csrf-portal',
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'portal\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-portal', 'httpOnly' => true],
         ],
