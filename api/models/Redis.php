@@ -55,7 +55,7 @@ class Redis
         }
 
         if ($expiry > 0) {
-            return $this->redisExpireKey($key, $expiry, $prefix);
+            return $this->redisObject->expire($redisKey, $expiry);
         }
 
         return false;
@@ -67,7 +67,7 @@ class Redis
      * @param $key  - applicable for list type only, indicate range start from value
      * @return mixed
      */
-    public function getKey($key, $start_from = 0)
+    public function getKey($redisKey, $start_from = 0)
     {
         if ($this->dataType == 'List') {
             $to = $start_from + $this->limit;
@@ -84,7 +84,7 @@ class Redis
      * @param $key  - Redis key
      * @return mixed
      */
-    public function removeKey($key)
+    public function removeKey($redisKey)
     {
         return $this->redisObject->del($redisKey);
     }

@@ -44,7 +44,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-
+        return static::findOne(['id' => $id]);
     }
 
     /**
@@ -121,21 +121,5 @@ class User extends ActiveRecord implements IdentityInterface
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
-
-    /**
-     * Generates new token for email verification
-     */
-    public function generateEmailVerificationToken()
-    {
-        $verificationToken = Yii::$app->security->generateRandomString() . '_' . time();
-        $redis = new Redis(Redis::SCENARIO_VERIFY_EMAIL);
-        $redis->setKey($verificationToken, $this->id);
-        return $verificationToken;
-    }
-
-    public function getVerificationToken()
-    {
-        return "dskflsdflj";
     }
 }

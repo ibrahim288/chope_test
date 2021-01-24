@@ -24,18 +24,19 @@ class SignupController extends Controller
     }
 
     /**
-     * Check validation key
-     */
-    public function actionView()
-    {
-
-    }
-
-    /**
      * Validate Email
      */
-    public function actionUpdate()
+    public function actionUpdate($id)
     {
+        $model = new SignupForm();
+        $model->scenario = SignupForm::SCENARIO_UPDATE;
+        $model->validation_token = $id;
+
+        if ($model->validate()) {
+            return Yii::$app->user->identity;
+        } else {
+            return $model->errors;
+        }
 
     }
 }
