@@ -4,9 +4,11 @@ namespace api\controllers\v1;
 use Yii;
 use yii\web\Controller;
 use api\models\SignupForm;
+use api\components\helpers\Utility;
 
 class SignupController extends Controller
 {
+    use Utility;
     /**
      * Signup
      */
@@ -33,7 +35,7 @@ class SignupController extends Controller
         $model->validation_token = $id;
 
         if ($model->validate()) {
-            return Yii::$app->user->identity;
+            return $this->parseUserIdentityResponse(Yii::$app->user->identity);
         } else {
             return $model->errors;
         }

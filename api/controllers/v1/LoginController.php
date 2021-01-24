@@ -4,9 +4,11 @@ namespace api\controllers\v1;
 use Yii;
 use yii\web\Controller;
 use api\models\LoginForm;
+use api\components\helpers\Utility;
 
 class LoginController extends Controller
 {
+    use Utility;
     /**
      * Login
      */
@@ -17,7 +19,7 @@ class LoginController extends Controller
         $model->setAttributes(Yii::$app->request->post());
 
         if ($model->validate()) {
-            return Yii::$app->user->identity;
+            return $this->parseUserIdentityResponse(Yii::$app->user->identity);
         } else {
             return $model->errors;
         }
