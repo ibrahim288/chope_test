@@ -42,6 +42,10 @@ class LoginForm extends Model
             if ($user->validatePassword($this->password)) {
                 Yii::$app->user->identity = $user;
                 $this->pushAction($user->id, self::SCENARIO_LOGIN);
+
+                $redis = new Redis(Redis::SCENARIO_VERIFY_TOKEN);
+                $redis->setKey($user->auth_key, $user->id);
+
                 return true;
             }
         }

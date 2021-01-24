@@ -9,7 +9,7 @@ class APIBaseController extends Controller
   {
       return [
           'basicAuth' => [
-              'class' => \yii\filters\auth\HttpBasicAuth::className(),
+              'class' => \yii\filters\auth\HttpBearerAuth::className(),
           ],
       ];
   }

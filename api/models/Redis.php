@@ -70,13 +70,11 @@ class Redis
     public function getKey($redisKey, $start_from = 0)
     {
         if ($this->dataType == 'List') {
-            $to = $start_from + $this->limit;
+            $to = $start_from + self::limit;
             return $this->redisObject->lrange($redisKey, $start_from , $to);
         } else { //String
             return $this->redisObject->get($redisKey);
         }
-
-        return $val;
     }
 
     /**

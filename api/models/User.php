@@ -55,7 +55,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['access_token' => $token]);
+        $redis = new Redis(Redis::SCENARIO_VERIFY_TOKEN);
+        $user_id = $redis->getKey($token);
+
+        return static::findIdentity($user_id);
     }
 
     /**
