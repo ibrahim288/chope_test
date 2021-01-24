@@ -12,6 +12,7 @@ Requirements
 Starting the Services
 ---------------------
 After you clone the repository simply just run `docker-compose up`.
+Add `127.0.0.1  chope.test` & `127.0.0.1    api.chope.test` to your hosts filer.
 It will take sometime first time, until all required libraries installed.
 
 DIRECTORY STRUCTURE
