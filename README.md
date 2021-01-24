@@ -17,6 +17,14 @@ The exposed project port is 8008.
 Postman collection has been committed with the code.
 It will take sometime first time, until all required libraries installed.
 
+REDIS
+-----
+Redis has 3 databases:
+- 0 contain Email verification Token.
+- 1 contain api token.
+- 2 contain Action logs.
+User commanda `docker exec -it chope_test_redis redis-cli -n 0 keys *` to get list of all token list. It will be needed to complete Signup and validate email.
+
 DIRECTORY STRUCTURE
 -------------------
 
