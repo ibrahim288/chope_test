@@ -5,7 +5,7 @@ services:
     image: composer/composer
     container_name: chope_test_composer
     working_dir: /var/www/chope_test
-    command: install
+    command: update
     volumes:
       - .:/var/www/chope_test
     networks:
@@ -63,6 +63,13 @@ services:
       - 8008:80
     networks:
       - app-network
+  redis:
+      image: redis
+      container_name: chope_test_redis
+      tty: true
+      networks:
+        - app-network
+
 networks:
   app-network:
     driver: bridge

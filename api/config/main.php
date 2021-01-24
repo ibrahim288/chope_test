@@ -55,6 +55,11 @@ return [
             'format' => yii\web\Response::FORMAT_JSON,
             'charset' => 'UTF-8',
         ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => "chope_test_redis",
+            'port' => 6379,
+        ],
     ],
     'params' => $params,
 ];

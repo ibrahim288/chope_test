@@ -23,8 +23,6 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
-    private $verification_token;
-
     public static function tableName()
     {
         return 'user';
@@ -130,7 +128,10 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public function generateEmailVerificationToken()
     {
-        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $verificationToken = Yii::$app->security->generateRandomString() . '_' . time();
+        $redis = new Redis(Redis::SCENARIO_VERIFY_EMAIL);
+        $redis->setKey($verificationToken, $this->id);
+        return $verificationToken;
     }
 
     public function getVerificationToken()

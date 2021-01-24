@@ -54,9 +54,11 @@ class SignupForm extends Model
         $user->email = $this->email;
         $user->setPassword($this->password);
         $user->generateAuthKey();
-        $user->generateEmailVerificationToken();
-        return $user->save() && $this->sendEmail($user);
-
+        if ($user->save()) {
+            $VerificationToken = $user->generateEmailVerificationToken();
+            return $this->sendEmail($user, $VerificationToken);
+        }
+        return false;
     }
 
     /**
@@ -64,7 +66,7 @@ class SignupForm extends Model
      * @param User $user user model to with email should be send
      * @return bool whether the email was sent
      */
-    protected function sendEmail($user)
+    protected function sendEmail($user, $VerificationToken)
     {
         // assume we sent an email.
 
